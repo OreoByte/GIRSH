@@ -126,7 +126,8 @@ func (terminal *Terminal) serveHTTPRevShellPowershell() error {
 func (terminal *Terminal) setSpawnTTY() {
 	terminal.getTerminalSize()
 	sttySize := "stty rows " + terminal.rows + " cols " + terminal.cols
-	terminal.spawnTTY = `/usr/bin/env python2.7 -c 'import pty; pty.spawn(["/bin/bash","-c"," ` + sttySize + `  ;bash"])'
+	terminal.spawnTTY = `/usr/bin/script -c '["/bin/bash","-q","/dev/null", ` sttySize + ` ; bash"]'
+/usr/bin/env python2.7 -c 'import pty; pty.spawn(["/bin/bash","-c"," ` + sttySize + `  ;bash"])'
 /usr/bin/env python -c 'import pty; pty.spawn(["/bin/bash","-c"," ` + sttySize + `  ;bash"])'
 /usr/bin/env python3 -c 'import pty; pty.spawn(["/bin/bash","-c"," ` + sttySize + `  ;bash"])'
 `
